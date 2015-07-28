@@ -1,0 +1,19 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: octothorpe_development
+  pool: 10
+  username: jpdicosola
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: octothorpe_development
+  pool: 10
+  username: jpdicosola
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: octothrope
+  pool: 10

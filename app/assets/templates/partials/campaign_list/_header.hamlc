@@ -1,0 +1,20 @@
+%tr
+  %th
+    Promo
+  %th
+    Description
+  %th
+    %i.icon_calendar
+    Dates
+  %th
+    %i.icon_pin_alt
+    Location
+  %th
+    %i.icon_tags
+    Hash Tags
+  %th
+    %i.social_share
+    Required
+  %th{:style => "min-width: 95px;"}
+    %i.icon_cogs
+    Action

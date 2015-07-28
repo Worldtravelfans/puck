@@ -1,0 +1,17 @@
+%tr
+  %th
+    %i.icon_profile
+    id
+  %th
+    %i.social_share
+  %th
+    %i.icon_document_alt
+    Post
+  %th
+    %i.icon_tags
+  %th
+    %i.icon_clock
+    Time
+
+  %th
+    %i.icon_image

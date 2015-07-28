@@ -1,0 +1,21 @@
+%tr
+  %th
+    Device Id
+  %th
+    %i.icon_mobile
+    Device Model
+  %th
+    OS
+  %th
+    %i.social_twitter
+
+  %th
+    %i.social_facebook
+
+  %th
+    %i.icon_clock
+    Last Interaction
+
+  %th{:style => "min-width: 95px;"}
+    %i.icon_cogs
+    Action

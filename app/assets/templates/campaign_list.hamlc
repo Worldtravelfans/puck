@@ -1,0 +1,24 @@
+%table.table.table-striped.table-advance.table-hover
+  %tbody
+    !=JST['partials/campaign_list/_header'](@)
+    -if @campaigns.length > 0
+      -for campaign in @campaigns
+        %tr{:id => "campaign-#{campaign.id}"}
+          %td #{campaign.intro_text}
+          %td #{campaign.promo_text}
+          %td #{moment(campaign.begin_date).format('M/DD/YYYY')} - #{moment(campaign.end_date).format('M/DD/YYYY')}
+          %td #{campaign.city_state}
+          %td #{campaign.hash_tags}
+          %td 
+            -if _.contains(campaign.required_social_networks, "twitter") 
+              %i.social_twitter
+            -if _.contains(campaign.required_social_networks, "facebook") 
+              %i.social_facebook
+            -if campaign.required_social_networks?.length == 0 || !campaign.required_social_networks?
+              n/a
+          %td
+            .btn-group
+              %a.btn.btn-primary{:href => "#"}
+                %i.icon_pencil-edit.js-edit{:id => "#{campaign.id}"}
+              %a.btn.btn-danger{:href => "#"}
+                %i.icon_close_alt2.js-delete{:id => "#{campaign.id}"}

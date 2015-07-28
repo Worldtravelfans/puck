@@ -1,0 +1,66 @@
+=javascript_include_tag "https://code.jquery.com/jquery-1.10.2.min.js"
+
+%input.js-file-upload{type: 'file', name: 'file'}
+
+:javascript
+    var self = this;
+
+    $(document).ready( function() {
+      $('.js-save').on('click', function(e) {
+        $('.js-save').text("Uploading...")
+        $.ajax({type: 'POST', data: {data: self.fileData}})
+         .done(function(result) {
+          console.log(result)
+          $('.js-save').text("Upload")
+          if (result === null)
+          {
+            $('.js-status').text("Image does not contain exif data.")
+            $('.js-status').css('color', 'red')
+          }
+          else {
+              $('.js-status').text("Image Uploaded!")
+              $('.js-status').css('color', 'green')
+              html = "<h3>Latest Upload</h3>"
+              html += "<h4>Phone Model: " + result.camera_model + "</h4><br>"
+              html+= "<iframe width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\"\r\nsrc=\"https:\/\/www.google.com\/maps\/embed\/v1\/place?q=" + result.location.latitude + "%2C%20" + result.location.longitude + "&key=AIzaSyCInrK_i3TuPEs5lUJCV5IhqvJFvq8T3Iw\"><\/iframe>"
+              $('.js-result').html(html)
+          }
+        })
+      })
+      $('.js-file-upload').on( 'change', function(e){ 
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function(event) {
+          self.fileData = event.target.result;
+
+        };
+        reader.readAsDataURL(file);
+
+        } )
+
+        window.setInterval(function() {
+          $.get('/ping_image', function(result) {
+            if (self.currentImageId !== result.id) {
+              self.currentImageId = result.id
+              if (result.camera_model === null) {
+                result.camera_model = "Unknown";
+              }
+              html = "<h3>Latest Upload</h3>"
+              html += "<h4>Phone Model: " + result.camera_model + "</h4><br>"
+                html+= "<iframe width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\"\r\nsrc=\"https:\/\/www.google.com\/maps\/embed\/v1\/place?q=" + result.location.latitude + "%2C%20" + result.location.longitude + "&key=AIzaSyCInrK_i3TuPEs5lUJCV5IhqvJFvq8T3Iw\"><\/iframe>"
+                $('.js-result').html(html);
+
+                var img_url = "/get_image/" + result.id;
+                console.log(img_url);
+                $('.js-picture').html("<img height = \"450\" width = \"800\" src = " +  img_url +  "/>");
+
+              }
+          })
+        }, 5000)
+        
+    } );
+%button.js-save{type: 'submit', value: 'submit'} Upload
+%h4.js-status ready to upload
+%hr
+%div.js-result{:style => "display: inline; margin-right 60px;"}
+%div.js-picture{:style => "display: inline;"}

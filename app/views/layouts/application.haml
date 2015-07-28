@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    =render :partial => 'layouts/partials/head'
+    %link{:rel => :stylesheet, :type => :"text/css", :href => "https://fonts.googleapis.com/css?family=Bree+Serif"}
+  =render partial: 'layouts/partials/navheader'
+  %body{class: "#{controller.controller_name}-controller #{@controller_class}"}
+    #site-container
+      #js-attach-wrap
+        =yield
+      #footer-wrap
+    #js-attach-footer
+    #modal-container
+      .modal-background
+      .modal
+  =render :partial => 'layouts/partials/footer'
+
+=render :partial => 'layouts/partials/javascripts'

@@ -1,0 +1,52 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}
+    %title Octothorpe | Posts
+
+    / HTML5 shim and Respond.js IE8 support of HTML5
+    /[if lt IE 9]
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+  %body
+    / container section start
+    %section#container
+      / header start
+      !=JST['partials/_sidebar'](@)
+
+      %section#main-content
+        %section.wrapper
+
+          .row
+            .col-lg-12
+              %h3.page-header
+                %i.icon_documents
+                Posts
+          / page start
+          .row
+            .col-lg-12
+              %section.panel
+                %table.table.table-striped.table-advance.table-hover
+                  %tbody
+                    !=JST['partials/posts/_header'](@)
+                    -if @posts.length > 0
+                      -for post in @posts.models
+                        %tr{:id => "post-#{post.id}"}
+                          %td #{post.get('user_id')}
+                          %td
+                            -if post.get('social_network')
+                              -if post.get('social_network') is "twitter"
+                                %i.social_twitter
+                              -else if post.get('social_network') is "facebook"
+                                %i.social_facebook
+                          %td #{post.get('message')}
+                          %td #{post.get('hash_tag')}
+                          %td #{moment(post.get('created_at')).format('M/DD/YYYY h:mm a')}
+                          %td
+                            %a{:href => "get_image/#{post.get('user_image_id')}"}
+                              %img{"src" => "get_image/#{post.get('user_image_id')}", :style => "width: 40px;"}
+                          
+          / page end
+      / main content end
+    / container section end

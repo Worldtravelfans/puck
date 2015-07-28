@@ -1,0 +1,1 @@
+window.Octothorpe = new Backbone.Marionette.Application()

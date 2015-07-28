@@ -1,0 +1,71 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}
+    %title Octothorpe | Users
+
+    / HTML5 shim and Respond.js IE8 support of HTML5
+    /[if lt IE 9]
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+  %body
+    / container section start
+    %section#container
+      / header start
+      !=JST['partials/_sidebar'](@)
+
+      %section#main-content
+        %section.wrapper
+
+          .row
+            .col-lg-12
+              %h3.page-header
+                %i.icon_group
+                Users
+          / page start
+          .row
+            .col-lg-12
+              %section.panel
+                %table.table.table-striped.table-advance.table-hover
+                  %tbody
+                    !=JST['partials/users/_header'](@)
+                    -if @users.length > 0
+                      -for user in @users.models
+                        %tr{:id => "user-#{user.id}"}
+                          %td #{user.get('device_identifier')}
+                          %td #{user.get('device_model')}
+                          %td 
+                            -if user.get('data')
+                              -if parseInt(user.get('data')['OS Version']) is 18
+                                JellyBean
+                              -if parseInt(user.get('data')['OS Version']) is 19
+                                KitKat
+                              -else if parseInt(user.get('data')['OS Version']) is 21 or parseInt(user.get('data')['OS Version']) is 22
+                                Lollipop
+                              -else if user.get('data')['OS Version']
+                                #{user.get('data')['OS Version']}
+                              -else
+
+                          %td 
+                            -if user.get('post_counts')
+                              %span.badge.bg-important #{user.get('post_counts')['twitter'] || 0}
+                            -if user.get('data')?['twitter_user_name']
+                              #{user.get('data')['twitter_user_name'] }
+                              
+
+                          %td 
+                            -if user.get('post_counts')
+                              %span.badge.bg-important #{user.get('post_counts')['facebook'] || 0}
+                            -if user.get('data')?['facebook_user_name']
+                              #{user.get('data')['facebook_user_name'] }
+
+                          %td #{moment(user.get('last_access_time')).format('M/DD/YYYY h:mm a')}
+
+                          %td
+                            .btn-group
+                              %a.btn.btn-danger
+                                %i.icon_close_alt2.js-delete{:id => "#{user.id}"}
+          / page end
+      / main content end
+    / container section end

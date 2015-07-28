@@ -1,0 +1,71 @@
+.row
+  .col-md-6.portlets
+    .panel.panel-default
+      .panel-heading
+        .pull-left Create Campaign
+        .widget-icons.pull-right
+          %a.wclose.js-cancel{:href => ""}
+            %i.fa.fa-times
+        .clearfix
+      .panel-body
+        .padd
+          .form.quick-post
+
+            %form.form-horizontal
+      
+              .form-group
+                %label.control-label.col-lg-2{:for => "intro_text"} Title
+                .col-lg-10
+                  %input#intro-text.form-control{:name => "intro_text", :value => "#{@model.get('intro_text')}", :type => "text", placeholder: "Title of notification popup"}
+         
+              .form-group
+                %label.control-label.col-lg-2{:for => "promo_text"} Description
+                .col-lg-10
+                  %textarea#promo-text.form-control{:name => "promo_text", :value => "test", placeholder: "Promo Description"}
+
+              .form-group
+                %label.control-label.col-lg-2 Start Date
+                .col-lg-10
+                  %input#begin-date.form-control{:name => "begin_date", :value => "#{moment(@model.get('begin_date')).format('YYYY-MM-DD')}", :type => "date", :style => "max-width: 30%;"}
+                %label.control-label.col-lg-2 End Date
+                .col-lg-10
+                  %input#end-date.form-control{:name => "end_date", :value => "#{moment(@model.get('end_date')).format('YYYY-MM-DD')}", :type => "date", :style => "max-width: 30%;"}
+                  
+          
+              .form-group
+                %label.control-label.col-lg-2{:for => "tags"} Tags
+                .col-lg-10
+                  %input#tags.form-control{:name => "hash_tags", :value => "#{@model.get('hash_tags')}", :type => "text", placeholder: "#hashtag1; #hashtag2"}
+
+              .form-group
+
+              .form-group
+                %label.control-label.col-lg-2{:for => "social-networks"} Twitter
+                .col-lg-10
+                  %input#twitter.form-control{:name => "twitter_checked", :type => "checkbox"}
+                %label.control-label.col-lg-2{:for => "social-networks"} Facebook
+                .col-lg-10
+                  %input#facebook.form-control{:name => "facebook_checked", :type => "checkbox"}
+
+              .form-group
+                %label.control-label.col-lg-2{:for => "image-upload"} Image
+                .col-lg-10
+                  %input#tags.form-control.js-file-upload{:name => "image", :value => "", :type => "file"}
+
+              .form-group
+                %label.control-label.col-lg-2{:for => "location"} Location
+                .col-lg-10
+                  %input#js-address.form-control{:name => "address", :value => "", :type => "text"}
+                %label.control-label.col-lg-2{:for => "radius"} Radius
+                .col-lg-10
+                  %input#js-radius.form-control{:name => "radius", :value => "300", :type => "text", :style => "max-width: 10%"}
+                .col-lg-10
+                  .js-location-picker{:style => "width: 500px; height: 400px;"}
+
+              .form-group
+                .col-lg-offset-2.col-lg-9
+                  %div.pull-right
+                    %button.btn.btn-default.js-reset{:type => "reset"} Reset
+                    %button.btn.btn-primary.js-submit Save
+        .widget-foot
+
